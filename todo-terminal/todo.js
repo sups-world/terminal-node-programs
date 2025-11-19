@@ -16,7 +16,17 @@ function saveTodos(todos) {
 
 // CLI commands
 const command = process.argv[2];
-const argument = process.argv[3];
+// anything inside the array becomes a string
+// const argument = process.argv[3];
+//To allow addition without inverted commas eg: ./todo.js add Buy grocery
+const argument = process.argv.slice(3).join(" ");
+
+function reArrangeIdInList(obtainedArray) {
+  const newArray = obtainedArray.map((t, index) => {
+    return { ...t, id: index + 1 };
+  });
+  return newArray;
+}
 
 function test() {
   console.log("Testing 1 2 3");
@@ -84,13 +94,42 @@ function deleteItem(itemNumber) {
     return;
   }
 
-  //Reassign IDs so they become 1,2,3..
-  const arrangedIdList = newTodos.map((t, index) => {
-    return { ...t, id: index + 1 };
-  });
+  const arrangedIdList = reArrangeIdInList(newTodos);
 
   saveTodos(arrangedIdList);
   console.log(`Deleted item successfully`);
+}
+
+function deleteAllCompletedTasks() {
+  const currentList = loadCurrentItems();
+  if (currentList.length < 1) {
+    console.log("List is empty. Unable to perform operation");
+    return;
+  }
+
+  const onlyIncompleteTasks = currentList.filter((item) => {
+    return item.done === false;
+  });
+
+  const arrangedIdList = reArrangeIdInList(onlyIncompleteTasks);
+
+  saveTodos(arrangedIdList);
+  console.log("All marked items have been deleted successfully !!!");
+}
+
+function markAllTasksComplete() {
+  const currentList = loadCurrentItems();
+  if (currentList.length < 1) {
+    console.log("List is empty. Unable to perform operation");
+    return;
+  }
+
+  const newList = currentList.map((t) => {
+    return { ...t, done: true };
+  });
+
+  saveTodos(newList);
+  console.log(`All tasks have been marked complete`);
 }
 
 // Command router
@@ -110,6 +149,23 @@ switch (command) {
   case "delete":
     deleteItem(argument);
     break;
+  case "1":
+    deleteAllCompletedTasks();
+    break;
+  case "2":
+    markAllTasksComplete();
+    break;
   default:
-    console.log("CLI terminal");
+    console.log(`
+      Available commands: 
+      ./todo.js list
+      ./todo.js add "Task Name"
+      ./todo.js delete <Id>
+      ./todo.js mark <Id>
+      `);
+    console.log(`
+        Preset commands(Enter the assigned number to perform operation):
+        1. Delete all completed tasks
+        2. Mark all tasks as complete
+        `);
 }
