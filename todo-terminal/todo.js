@@ -132,6 +132,24 @@ function markAllTasksComplete() {
   console.log(`All tasks have been marked complete`);
 }
 
+function moveAllIncompleteTasksToTop() {
+  const currentList = loadCurrentItems();
+
+  if (!currentList.length) {
+    console.log("Empty List !!!");
+    return;
+  }
+
+  const incompleteTasks = currentList.filter((t) => t.done === false);
+  const completeTasks = currentList.filter((t) => t.done === true);
+
+  const mergedList = [...incompleteTasks, ...completeTasks];
+  const arrangeIdList = reArrangeIdInList(mergedList);
+
+  saveTodos(arrangeIdList);
+  console.log(`All incomplete tasks have been moved to the top.`);
+}
+
 // Command router
 switch (command) {
   case "test":
@@ -155,6 +173,9 @@ switch (command) {
   case "2":
     markAllTasksComplete();
     break;
+  case "3":
+    moveAllIncompleteTasksToTop();
+    break;
   default:
     console.log(`
       Available commands: 
@@ -167,5 +188,6 @@ switch (command) {
         Preset commands(Enter the assigned number to perform operation):
         1. Delete all completed tasks
         2. Mark all tasks as complete
+        3. Move all incomplete tasks to the top
         `);
 }

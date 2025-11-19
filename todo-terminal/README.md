@@ -1,3 +1,40 @@
+# CLI Todo App
+
+A simple CLI(Command Line Interface) todo list app built using node.js.
+Manages tasks directly from the terminal
+
+---
+
+## Features
+
+- Add new tasks
+- Remove task
+- Toggle complete status of task
+- Mark all tasks as completed
+- Delete all completed tasks
+- Move all incomplete tasks to the top
+- JSON-based storage
+
+## Installation / Operation
+
+1. Make the script executable
+
+```bash
+chmod +x todo.js
+```
+
+2. Run the app as follows
+
+```bash
+./todo.js add "Go for a run"
+./todo.js list
+
+```
+
+---
+
+## Glossary
+
 ## process.argv
 
 - It is an array that contains the command-line arguments passed when running a node script
@@ -43,8 +80,3 @@ process.argv = [
 ```
 
 ---
-
-# Enhancements
-
-- Remove all done items with one command
-- Bring unmarked to the top

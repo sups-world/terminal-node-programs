@@ -1,12 +1,22 @@
 [
   {
     "id": 1,
-    "text": "Buygrocery",
+    "text": "visit museum",
     "done": false
   },
   {
     "id": 2,
-    "text": "visit museum",
+    "text": "go running",
     "done": false
+  },
+  {
+    "id": 3,
+    "text": "Buy chicken",
+    "done": true
+  },
+  {
+    "id": 4,
+    "text": "Buy spinach",
+    "done": true
   }
 ]
