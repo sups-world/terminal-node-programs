@@ -47,8 +47,8 @@ chmod +x todo.js
 process.argv = [
   "/usr/bin/node", // argv[0] → the node executable path
   "/path/to/todo.js", // argv[1] → the script file path
-  "add", // argv[2] → your first argument
-  "Buy milk", // argv[3] → your second argument
+  "add", // argv[2] → user's first argument
+  "Buy milk", // argv[3] → user's second argument
 ];
 ```
 
@@ -56,7 +56,7 @@ process.argv = [
 
 `chmod +x todo.js`
 
-- THis turns the .js file into a runnable script.
+- This turns the .js file into a runnable script.
   - Run using `./todo.js command`
 
 ## Detailing process.argv[]
@@ -67,16 +67,5 @@ process.argv = [
 | `process.argv[1]` | Path to the script (todo.js)                                |
 | `process.argv[2]` | First real argument → the command ("add", "list", "delete") |
 | `process.argv[3]` | Second real argument → extra data (task text or id)         |
-
-- Further explanation
-
-```js
-process.argv = [
-  "/usr/bin/node", // argv[0] → the node executable path
-  "/path/to/todo.js", // argv[1] → the script file path
-  "add", // argv[2] → your first argument
-  "Buy milk", // argv[3] → your second argument
-];
-```
 
 ---
