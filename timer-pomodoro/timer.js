@@ -4,7 +4,6 @@ const command = process.argv[2];
 const argument = process.argv.slice(3).join(" ");
 
 async function timerOperation(mode, allotedMinutes) {
-  let modeName = "Custom-time";
   let startMessage = "";
   let endMessage = "";
 
@@ -45,6 +44,7 @@ async function timerOperation(mode, allotedMinutes) {
       );
       if (count === 0) {
         clearInterval(intervalId);
+        process.stdout.write(`\x07`);
         console.log(`\n ${endMessage}`);
         resolve();
       }
@@ -71,16 +71,18 @@ async function timerMode(mode, allotedMinutes) {
 async function pomoCycle(operationType) {
   switch (operationType) {
     case "start":
+      console.log(`Note: Pomodoro timer cannot be paused`);
       console.log("Let's commence !!");
-      // await timerMode("work");
-      // await timerMode("shortBreak");
-      // await timerMode("work");
-      // await timerMode("shortBreak");
+      await timerMode("work");
+      await timerMode("shortBreak");
+      await timerMode("work");
+      await timerMode("shortBreak");
 
       await timerMode("work");
       await timerMode("shortBreak");
       await timerMode("work");
       await timerMode("longBreak");
+
       console.log("\n The session has concluded !!!");
       break;
     default:
@@ -90,6 +92,9 @@ async function pomoCycle(operationType) {
 
 //Command router
 switch (command) {
+  case "test":
+    process.stdout.write(`\x07`);
+    break;
   case "work":
     timerMode("work");
     break;
