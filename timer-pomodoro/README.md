@@ -9,5 +9,4 @@ I wanted a less distracting, lightweight pomodoro timer. So I built this app usi
 
 ## Future Enhancements
 
-- Bell chime when timer ends
 - Custom timer with pause and reset options

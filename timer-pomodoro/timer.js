@@ -1,5 +1,17 @@
 #!/usr/bin/env node
 
+import readline from "node:readline";
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+function askQuestion(query) {
+  return new Promise((resolve) => {
+    rl.question(query, (answer) => resolve(answer));
+  });
+}
+
 const command = process.argv[2];
 const argument = process.argv.slice(3).join(" ");
 
@@ -90,6 +102,24 @@ async function pomoCycle(operationType) {
   }
 }
 
+async function customTimer() {
+  const userMinutes = await askQuestion(
+    `Enter minutes(must be a valid integer) `
+  );
+  if (
+    !userMinutes ||
+    isNaN(parseInt(userMinutes)) ||
+    parseInt(userMinutes) < 1
+  ) {
+    console.log("Invalid input. Please try again");
+    customTimer();
+  }
+
+  const validMinutes = parseInt(userMinutes);
+
+  timerOperation("Custom ", validMinutes);
+}
+
 //Command router
 switch (command) {
   case "test":
@@ -106,6 +136,9 @@ switch (command) {
     break;
   case "pomo":
     pomoCycle(argument);
+    break;
+  case "custom":
+    customTimer(argument);
     break;
 
   default:
