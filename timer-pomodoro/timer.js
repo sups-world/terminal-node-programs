@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import readline from "node:readline";
+import { keyPressListener } from "./keyListener.js";
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -123,7 +124,7 @@ async function customTimer() {
 //Command router
 switch (command) {
   case "test":
-    process.stdout.write(`\x07`);
+    keyPressListener();
     break;
   case "work":
     timerMode("work");
