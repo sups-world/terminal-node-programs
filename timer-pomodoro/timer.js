@@ -149,5 +149,6 @@ switch (command) {
       2. short break(5 minutes) -> ./timer.js sb
       3. long break(15 minutes) -> ./timer.js lb
       4. Pomodoro cycle -> ./timer.js pomo start
+      5. Custom timer(allows only minutes for now) -> ./timer.js custom
       `);
 }
